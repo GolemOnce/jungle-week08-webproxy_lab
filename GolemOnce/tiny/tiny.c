@@ -138,7 +138,7 @@ int parse_uri(char *uri, char *filename, char *cgiargs) {
     strcpy(cgiargs, "");
     strcpy(filename, ".");
     strcat(filename, uri);
-    if(uri[strlen(uri)-1] == "/")
+    if(uri[strlen(uri)-1] == '/')
       strcat(filename, "home.html");
     return 1;
   }
@@ -199,9 +199,6 @@ void serve_dynamic(int fd, char *filename, char *cgiargs, char *method) {
 
   sprintf(buf, "HTTP/1.0 200 OK\r\n");
   sprintf(buf, "%sServer: Tiny Web Server\r\n", buf);
-  // HTTP 응답 static과 일관성 유지
-  sprintf(buf, "%sConnection: close\r\n\r\n", buf);
-  sprintf(buf, "%sContent-type: text/html\r\n", buf);
   Rio_writen(fd, buf, strlen(buf));
 
   if (Fork() == 0) {
