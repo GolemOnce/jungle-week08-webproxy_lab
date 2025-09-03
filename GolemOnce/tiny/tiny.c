@@ -138,13 +138,13 @@ int parse_uri(char *uri, char *filename, char *cgiargs) {
     strcpy(cgiargs, "");
     strcpy(filename, ".");
     strcat(filename, uri);
-    if(uri[strlen(uri)-1] == '/')
+    if(uri[strlen(uri)-1] == "/")
       strcat(filename, "home.html");
     return 1;
   }
   else { // 동적 컨텐츠
-    // ptr = index(uri, '?');
-    ptr = strchr(uri, '?');
+    // ptr = index(uri, "?");
+    ptr = strchr(uri, "?");
     if (ptr) {
       strcpy(cgiargs, ptr+1);
       *ptr = '\0';
